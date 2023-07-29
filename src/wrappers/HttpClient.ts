@@ -20,12 +20,29 @@ export class HttpClient {
         const response = await fetch(`${this.baseUrl}${resource}${url}`, {
             method: "GET",
             headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
-                "Access-Control-Max-Age": "86400",
+                "Content-Type": "application/json",
                 "Authorization": `Bearer ${(headers as any).authorization}`,
                 "Notion-Version": "2022-06-28"
-            }
+            },
+        });
+
+        if (response.status === 204) {
+            return null;
+        }
+
+        return response.json();
+    }
+
+    public async post(resource: string, url: string, body: Record<string, unknown>, config: Record<string, unknown>): Promise<any> {
+        const { headers = {} } = config;
+        const response = await fetch(`${this.baseUrl}${resource}${url}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${(headers as any).authorization}`,
+                "Notion-Version": "2022-06-28"
+            },
+            body: JSON.stringify(body)
         });
 
         if (response.status === 204) {

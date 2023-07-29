@@ -1,3 +1,4 @@
+import { Book, NotionBook, NotionBookToFormat } from "@/types";
 import { HttpClient } from "@/wrappers/HttpClient";
 
 export class NotionService {
@@ -11,11 +12,33 @@ export class NotionService {
         this.httpClient = HttpClient.getInstance();
     }
 
-    async getBooks(): Promise<any> {
-        const result = await this.httpClient.get("/databases/", this.databaseId, {
-            headers: { authorization: this.authKey }
-        });
-        console.log(result);
+    async getBooks(): Promise<Array<Book>> {
+        try {
+            const result = await this.httpClient.post("/databases/", `${this.databaseId}/query`, {}, {
+                headers: { authorization: this.authKey }
+            });
+
+            console.log(result.results);
+            return result.results
+                .map((result: NotionBook) => ({
+                    id: result.id, book: result.properties
+                }))
+                .map(this.formatNotionBook);
+        } catch (error: unknown) {
+            throw new Error("Error retrieving books data");
+        }
     }
 
+    private formatNotionBook(notionBook: NotionBookToFormat): Book {
+        return {
+            id: notionBook.id,
+            description: notionBook.book.description.rich_text[0].text.content,
+            author: notionBook.book.author.rich_text[0].text.content,
+            isbn: notionBook.book.isbn.rich_text[0].text.content,
+            affiliateAw: notionBook.book.amazon_affiliate.url ?? "",
+            portrait: notionBook.book.portrait.url ?? "",
+            difficult: notionBook.book.dificult.select.name,
+            title: notionBook.book.Name?.title[0].text.content,
+        }
+    }
 }
