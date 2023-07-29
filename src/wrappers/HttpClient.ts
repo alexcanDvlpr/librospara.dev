@@ -24,6 +24,7 @@ export class HttpClient {
                 "Authorization": `Bearer ${(headers as any).authorization}`,
                 "Notion-Version": "2022-06-28"
             },
+            cache: "no-cache"
         });
 
         if (response.status === 204) {
@@ -42,7 +43,8 @@ export class HttpClient {
                 "Authorization": `Bearer ${(headers as any).authorization}`,
                 "Notion-Version": "2022-06-28"
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
+            cache: "no-cache"
         });
 
         if (response.status === 204) {
