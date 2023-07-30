@@ -7,7 +7,11 @@ const BookCard = ({ book }: { book: Book }) => {
     return (
         <Link href={`/books/${book.slug}`}>
             <article className="w-full sm:w-52 cursor-pointer">
-                <img src={book.portrait} alt={book.title} className="w-full sm:w-52 shadow-lg hover:rounded-lg hover:animate-wiggle transition-all" />
+                <img
+                    style={{ "view-transition-name": `${book.slug}-image` }}
+                    src={book.portrait}
+                    alt={book.title}
+                    className="w-full sm:w-52 shadow-lg hover:rounded-lg hover:animate-wiggle transition-all" />
             </article>
         </Link>
     );
