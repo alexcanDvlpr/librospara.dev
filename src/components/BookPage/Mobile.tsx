@@ -1,4 +1,5 @@
 import { Book } from "@/types";
+import Image from "next/image";
 
 const BookPageMobile = ({ book }: { book: Book }) => {
 
@@ -13,7 +14,14 @@ const BookPageMobile = ({ book }: { book: Book }) => {
                 <h1 className="text-3xl font-extrabold pt-1">{truncateTitle(book.title)}</h1>
             </div>
             <div className="w-full px-2">
-                <img src={book.portrait} alt={book.title} style={{ "view-transition-name": `${book.slug}-image` }} />
+                <Image
+                    width={387}
+                    height={688}
+                    className="bookImage"
+                    src={book.portrait}
+                    alt={book.title}
+                    style={{ "view-transition-name": `${book.slug}-image` }}
+                />
             </div>
         </div>
     )

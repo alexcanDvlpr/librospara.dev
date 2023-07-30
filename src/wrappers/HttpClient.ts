@@ -35,7 +35,7 @@ export class HttpClient {
     }
 
     public async post(resource: string, url: string, body: Record<string, unknown>, config: Record<string, unknown>): Promise<any> {
-        const { headers = {} } = config;
+        const { headers = {}, cache = false } = config;
         const response = await fetch(`${this.baseUrl}${resource}${url}`, {
             method: "POST",
             headers: {

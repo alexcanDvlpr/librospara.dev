@@ -22,7 +22,7 @@ export class NotionService {
                 .map((result: NotionBook) => ({
                     id: result.id, book: result.properties
                 }))
-                .map(this.formatNotionBook);
+                .map(this.formatNotionBook)
         } catch (error: unknown) {
             throw new Error("Error retrieving books data");
         }
@@ -31,7 +31,8 @@ export class NotionService {
     async getBookBySlug(slug: string): Promise<Book> {
         try {
             const result = await this.httpClient.post("/databases/", `${this.databaseId}/query`, {}, {
-                headers: { authorization: this.authKey }
+                headers: { authorization: this.authKey },
+                cache: true
             });
 
             return result.results
