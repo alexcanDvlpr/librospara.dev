@@ -5,7 +5,7 @@ interface NotionBookToFormat {
     book: Record<string, any>
 };
 
-type ReadingDifficult = "Low" | "Normal" | "Hight"
+type ReadingDifficult = "Low" | "Normal" | "Hight";
 
 interface Book {
     id: string;
@@ -16,6 +16,7 @@ interface Book {
     portrait: string;
     difficult: ReadingDifficult;
     title: string;
+    slug: string;
 }
 
 export type {

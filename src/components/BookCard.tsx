@@ -1,12 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
 import { Book } from "@/types";
+import Link from "next/link";
 
 const BookCard = ({ book }: { book: Book }) => {
 
     return (
-        <article>
-            <img src={book.portrait} alt={book.title} />
-            <h1>{book.title}</h1>
-        </article>
+        <Link href={`/books/${book.slug}`}>
+            <article className="w-full sm:w-52 cursor-pointer">
+                <img src={book.portrait} alt={book.title} className="w-full sm:w-52 shadow-lg hover:rounded-lg hover:animate-wiggle transition-all" />
+            </article>
+        </Link>
     );
 }
 

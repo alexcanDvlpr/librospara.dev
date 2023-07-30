@@ -18,12 +18,28 @@ export class NotionService {
                 headers: { authorization: this.authKey }
             });
 
-            console.log(result.results);
             return result.results
                 .map((result: NotionBook) => ({
                     id: result.id, book: result.properties
                 }))
                 .map(this.formatNotionBook);
+        } catch (error: unknown) {
+            throw new Error("Error retrieving books data");
+        }
+    }
+
+    async getBookBySlug(slug: string): Promise<Book> {
+        try {
+            const result = await this.httpClient.post("/databases/", `${this.databaseId}/query`, {}, {
+                headers: { authorization: this.authKey }
+            });
+
+            return result.results
+                .filter((book: NotionBook) => book.properties.slug.rich_text[0].text.content === slug)
+                .map((result: NotionBook) => ({
+                    id: result.id, book: result.properties
+                }))
+                .map(this.formatNotionBook)[0];
         } catch (error: unknown) {
             throw new Error("Error retrieving books data");
         }
@@ -39,6 +55,7 @@ export class NotionService {
             portrait: notionBook.book.portrait.url ?? "",
             difficult: notionBook.book.dificult.select.name,
             title: notionBook.book.Name?.title[0].text.content,
+            slug: notionBook.book.slug.rich_text[0].text.content,
         }
     }
 }

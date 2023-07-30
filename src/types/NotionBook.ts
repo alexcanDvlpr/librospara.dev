@@ -12,6 +12,7 @@ export interface NotionBook {
     properties: Properties;
     url: string;
     publicURL: null;
+    slug: Slug;
 }
 
 export interface TedBy {
@@ -31,6 +32,7 @@ export interface Properties {
     portrait: AmazonAffiliate;
     amazonAffiliate: AmazonAffiliate;
     dificult: Dificult;
+    slug: Slug;
     name: Name;
 }
 
@@ -44,6 +46,12 @@ export interface Author {
     id: string;
     type: string;
     richText: Title[];
+}
+
+export interface Slug {
+    id: string;
+    type: string;
+    rich_text: Title[];
 }
 
 export interface Title {

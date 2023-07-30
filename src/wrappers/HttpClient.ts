@@ -44,7 +44,7 @@ export class HttpClient {
                 "Notion-Version": "2022-06-28"
             },
             body: JSON.stringify(body),
-            cache: "no-cache"
+            next: { revalidate: 10 }
         });
 
         if (response.status === 204) {
