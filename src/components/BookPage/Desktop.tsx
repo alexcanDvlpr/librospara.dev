@@ -25,7 +25,6 @@ const BookPageDesktop = ({ book }: { book: Book }) => {
                 <h1 className="text-4xl font-extrabold">{book.title}</h1>
                 <p className="text-lg">{book.isbn} | {book.author}</p>
                 <hr className="my-2" />
-                <p className="book-description">{book.description}</p>
                 {
                     book.affiliateAw ? (
                         <Link target="_blank" href={book.affiliateAw} className="btn btn-primary">
@@ -33,6 +32,7 @@ const BookPageDesktop = ({ book }: { book: Book }) => {
                         </Link>
                     ) : null
                 }
+                <p className="book-description">{book.description}</p>
             </section>
             <DificultStatus difficult={book.difficult} />
         </div>
