@@ -3,7 +3,7 @@ import Link from "next/link";
 const Navbar = () => {
 
     return (
-        <div className="navbar bg-base-100 fixed top-0 right-0 left-0 w-full flex flex-col sm:flex-row justify-center">
+        <div className="navbar bg-base-100 fixed top-0 right-0 left-0 w-full flex flex-col sm:flex-row justify-center z-50">
             <div className="justify-center sm:navbar-start">
                 <Link href="/" className="sm:px-4 font-bold normal-case text-xl">librosPara.dev</Link>
             </div>

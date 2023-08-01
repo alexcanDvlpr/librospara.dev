@@ -1,15 +1,9 @@
 import { ReadingDifficult } from "@/types";
+import { translateDifficultStatus } from "@/utils";
 
 interface IProps { difficult: ReadingDifficult };
 
 const DificultStatus = ({ difficult }: IProps) => {
-
-    const translateDifficultStatus = (difficult: string) =>
-        difficult === "Low"
-            ? "Baja"
-            : difficult === "Hight"
-                ? "Alta"
-                : "Normal";
 
     return (
         <div className="w-full flex flex-row justify-center items-center absolute bottom-5 right-0 left-0">
